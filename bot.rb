@@ -20,10 +20,8 @@ class NiceGuy
                   lang: "ja",
                   locale: "ja",
                   rpp: 3).each do |t|
-      # 結婚、婚約リスト
-      #@from_user << t.from_user
+      @from_user << t.from_user
     end
-    @from_user << 'nabetama'
   end
   
   def update
