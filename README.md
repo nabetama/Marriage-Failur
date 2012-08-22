@@ -1,2 +1,2 @@
 ### nice-guy-jpn
-Twitter bot作成中
+Twitter bot
