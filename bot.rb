@@ -34,7 +34,8 @@ class NiceGuy
 
     @from_user.each do |name|
       message = open('bot.txt').readlines.shuffle.first
-      Twitter.update("@#{name} : #{message}")
+      #Twitter.update("@#{name} : #{message}")
+      puts "#{name} : #{message}"
     end
   end
 
