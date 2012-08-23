@@ -16,10 +16,11 @@ class NiceGuy
   end
 
   def search_word
-    Twitter.search("/結婚|婚約/",
+    Twitter.search("/結婚/",
                   lang: "ja",
-                  locale: "ja",
-                  rpp: 3).each do |t|
+                  rpp: 10,
+                  result_type: "recent",
+                  ).each do |t|
       @from_user << t.from_user
     end
   end
@@ -34,11 +35,10 @@ class NiceGuy
 
     @from_user.each do |name|
       message = open('bot.txt').readlines.shuffle.first
-      #Twitter.update("@#{name} : #{message}")
-      puts "#{name} : #{message}"
+      Twitter.update("@#{name} : #{message}")
+#      puts "#{name} : #{message}"
     end
   end
-
 end
 
 nice_guy = NiceGuy.new
