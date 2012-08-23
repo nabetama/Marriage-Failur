@@ -1,7 +1,9 @@
 # -*- encoding: UTF-8 -*-
-require 'rubygems'
-require 'twitter'
-require './pass'
+require "rubygems"
+require "bundler/setup"
+require "twitter"
+$LOAD_PATH << File.dirname(__FILE__)
+require "pass"
 include Oauth
 
 class NiceGuy
@@ -12,16 +14,14 @@ class NiceGuy
     @con_secret = Oauth::settings[:con_secret]
     @acc_token = Oauth::settings[:acc_token]
     @acc_token_secret = Oauth::settings[:acc_token_secret]
-    @from_user = []
+    @from_users = []
   end
 
   def search_word
-    Twitter.search("/結婚/",
-                  lang: "ja",
-                  rpp: 10,
-                  result_type: "recent",
-                  ).each do |t|
-      @from_user << t.from_user
+    tweets = Twitter.search("結婚")
+
+    tweets.each do |tweet|
+      @from_users << tweet.from_user
     end
   end
   
@@ -33,7 +33,7 @@ class NiceGuy
       config.oauth_token_secret = @acc_token_secret
     end
 
-    @from_user.each do |name|
+    @from_users.each do |name|
       message = open('bot.txt').readlines.shuffle.first
       Twitter.update("@#{name} : #{message}")
 #      puts "#{name} : #{message}"
