@@ -6,9 +6,10 @@ $LOAD_PATH << File.dirname(__FILE__)
 require "pass"
 
 class NiceGuy
-  attr_accessor :from_user
 
   include OauthInfo
+
+  attr_accessor :from_user
 
   def initialize
     @con_key = keys[:con_key]
