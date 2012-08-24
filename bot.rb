@@ -4,16 +4,17 @@ require "bundler/setup"
 require "twitter"
 $LOAD_PATH << File.dirname(__FILE__)
 require "pass"
-include Oauth
 
 class NiceGuy
   attr_accessor :from_user
 
+  include OauthInfo
+
   def initialize
-    @con_key = Oauth::settings[:con_key]
-    @con_secret = Oauth::settings[:con_secret]
-    @acc_token = Oauth::settings[:acc_token]
-    @acc_token_secret = Oauth::settings[:acc_token_secret]
+    @con_key = keys[:con_key]
+    @con_secret = keys[:con_secret]
+    @acc_token = keys[:acc_token]
+    @acc_token_secret = keys[:acc_token_secret]
     @from_users = []
   end
 
